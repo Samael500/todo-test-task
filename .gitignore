@@ -1,4 +1,4 @@
-todo_venv/
-todoSite-OLD/
+todovenv/*
 *.pyc
-
+*.sqlite3
+settings_local.py
