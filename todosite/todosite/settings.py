@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&eq^#&&et94qt_(7z1&8k0i-9%^v3kmx1nsec-l+qy_arrp9o6'
+SECRET_KEY = 'y7b5-zy^6dbl0n4fc1t84wtu-=msiqa&8adj9ikmb0!9j@-6(('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,8 +36,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+    #my app
+    'usersapp',
     'todoapp',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,22 +60,19 @@ WSGI_APPLICATION = 'todosite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tododb',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Kiev'
+TIME_ZONE = 'EET'
 
 USE_I18N = True
 
@@ -85,7 +85,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'templates/static/')]
 
-TEMPLATE_DIRS = (
-    '../todosite/templates', # Change this to your own directory.
-)
+#Templates
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+
+try:
+    from settings_local import *
+except ImportError:
+    pass

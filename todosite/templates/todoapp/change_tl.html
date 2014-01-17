@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Change task list</h2>
+
+<div class="container">
+    <form action="{% url 'todoapp:changetl' tl %}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn">Save</button>
+    </form>
+</div>
+
+{% endblock %}

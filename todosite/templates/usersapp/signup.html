@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+{% block content %}
+
+<div class = "container">
+        <form class="form-signin" action="{% url 'usersapp:signup' %}" method="POST" style="max-width:777px">
+            <h2 class="form-signin-heading">Please sign Up</h2>
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+        </form> 
+</div>
+{%  endblock %}

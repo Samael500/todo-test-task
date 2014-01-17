@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if tl %} 
+<h2>Task lists "{{ tl.title }}" detail</h2>
+
+<a href="{% url 'todoapp:changetl' tl.id %}">
+    <button type="button" class="btn">Переименовать</button>
+</a>
+<a href="{% url 'todoapp:deltl' tl.id %}">
+    <button type="button" class="btn">Удалить</button>
+</a>
+<form action="{% url 'todoapp:addtask' tl.id %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn">Add Task</button>
+</form>
+{% else %}
+<h2>Free tasks detail</h2>
+
+{% endif %}
+
+{% if tasks %}
+    <ul>
+    {% for task in tasks %}
+        <li>
+            <a href="{% url 'todoapp:changetask' task.id %}">
+                {{ task.subject }}
+            </a> |
+            <a href="{% url 'todoapp:change' task.id %}">
+            {% if task.status %}
+                Выполнена
+            {% else %}
+                Не выполнена
+            {% endif %}
+            </a> |
+            <a href="{% url 'todoapp:deltask' task.id %}">
+                Удалить
+            </a>           
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tasklists</p>
+{% endif %}
+
+{% endblock %}
+

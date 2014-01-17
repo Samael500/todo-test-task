@@ -7,11 +7,14 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'todosite.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
- 
-    url(r'^admin/', include('todoapp.adminurls')),
+
+    url(r'^$', 'todoapp.views.index', name='index'),
+
 
     url(r'^admin/', include(admin.site.urls)),
-       # ex: /todoapp/5/
-    url(r'^todoapp/', include('todoapp.urls')),
+    url(r'^users/', include('usersapp.urls', namespace="usersapp")),
+    url(r'^todo/', include('todoapp.urls', namespace="todoapp")),
+
+    url(r'^accounts/', include('usersapp.urls') ),
 
 )

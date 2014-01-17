@@ -1,9 +1,44 @@
-{% if taskslist %}
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Task lists</h2>
+
+<form action="{% url 'todoapp:addtl' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="btn">Add TaskList</button>
+</form>
+{% if tasklists %}
     <ul>
-    {% for task in taskslist %}
-        <li><a href="/todoapp/{{ task.id }}/">{{ task.subject }}</a></li>
+    {% for tl in tasklists %}
+        <li>
+            <a href="{% url 'todoapp:detail' tl.id %}">
+                {{ tl.title }} ( {{ tl.number_of_tasks }} )
+            </a>
+            |
+            <a href="{% url 'todoapp:deltl' tl.id %}">
+                Удалить список
+            </a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No tasks are available.</p>
+    <p>No tasklists</p>
 {% endif %}
+
+<hr />
+
+<a href="{% url 'todoapp:detail' %}">
+    Free tasks ( {{ free }} )
+</a>
+
+{% endblock %}
+
+
+
+<!-- <form action="{% url 'questionapp:addquestion' %}" method="get">
+        {% csrf_token %}
+        <input type="submit" value="Add question" />
+</form>
+ -->

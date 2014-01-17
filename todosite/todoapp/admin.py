@@ -4,12 +4,9 @@ from django.contrib import admin
 
 from todoapp.models import Task
 from todoapp.models import TaskList
-#from models import User
 
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
-
-# from models import DateTime
 
 class TaskInline(admin.TabularInline):
     model = Task
@@ -18,11 +15,11 @@ class TaskInline(admin.TabularInline):
 class TaskAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {"fields": ["subject", "status"]}),
-        ("User info", {"fields": ["tasklist", "user"], "classes": ["collapse"]}),
+        ("User info", {"fields": ["tl", "user"], "classes": ["collapse"]}),
         #("Date info", {"fields": ["created"]}),
     ]
     
-    list_display = ["subject", "user", "tasklist", "created", "status"]
+    list_display = ["subject", "user", "tl", "created", "status"]
     
     search_fields = ["subject"]
     list_filter = ["created", "status", "user"]
@@ -39,20 +36,5 @@ class TaskListAdmin(admin.ModelAdmin):
 
     date_hierarchy = "created"
 
-
-class MyUserAdmin(UserAdmin):
-
-    fields = ("username", "password", "email", "tasklists")
-
-    fieldsets = None
-
-    readonly_fields = ("username", "tasklists",)
-    
-    def tasklists(self, obj):
-        return str(obj) + " url ../admin/auth/user/" + str(obj.id) + "/tasklists"
-
 admin.site.register(Task, TaskAdmin)
 admin.site.register(TaskList, TaskListAdmin)
-
-admin.site.unregister(User)
-admin.site.register(User, MyUserAdmin)
