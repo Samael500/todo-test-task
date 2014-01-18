@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'usersapp',
     'todoapp',
 
+    'south',
+
 )
 
 MIDDLEWARE_CLASSES = (

@@ -75,10 +75,10 @@ def addtask(request, tasklist_id ):
         form = AddTaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('todoapp:detail', args=(task.tl.id,) ))
+            return HttpResponseRedirect(reverse('todoapp:detail', args=(task.tl_id,) ))
     else:
         form = AddTaskForm()
-    return HttpResponseRedirect(reverse('todoapp:detail', args=(task.tl.id,) ))
+    return HttpResponseRedirect(reverse('todoapp:detail', args=(task.tl_id,) ))
 
 @login_required
 def changetl(request, tasklist_id ):
@@ -100,10 +100,13 @@ def changetask(request, task_id ):
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
+            print "true"
             form.save()
             if task.tl_id: path = reverse('todoapp:detail', args=(task.tl_id,))
             else: path = reverse('todoapp:detail')
             return HttpResponseRedirect(path)
+        print "false"
+
     else:
         form = TaskForm(instance=task)
     return render(request, 'todoapp/change_task.html',{'form': form, 'task':task_id,})

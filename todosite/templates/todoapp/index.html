@@ -28,11 +28,11 @@
 {% endif %}
 
 <hr />
-
+{% if not free == 0 %}
 <a href="{% url 'todoapp:detail' %}">
     Free tasks ( {{ free }} )
 </a>
-
+{% endif %}
 {% endblock %}
 
 
