@@ -1,9 +1,0 @@
-{% if taskslist %}
-    <ul>
-    {% for task in taskslist %}
-        <li><a href="admin/todoapp/tasks/{{ task.id }}/">{{ task.subject }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No tasks are available.</p>
-{% endif %}
